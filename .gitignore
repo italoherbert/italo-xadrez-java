@@ -1,5 +1,5 @@
 # ignora pasta deploy
-deploy
+deploy/
 
 # ignora pasta target
-target
+target/

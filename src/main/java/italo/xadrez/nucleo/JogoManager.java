@@ -202,12 +202,18 @@ public class JogoManager implements PecaManager {
         return true;
     }
     
-    public boolean verificaSeRoqueJogada( RoqueJogo roque, PecaIDUtil pecaIDUtil, Matriz mat, int novoI, int novoJ, int cor ) {                
-        if ( roque.getCorJogador() == cor && !roque.isMoveuRei() && 
-                ( novoI == roque.getI() ) &&
-                ( novoJ == 1 || novoJ == 6 ) ) {
+    public boolean verificaSeRoqueJogada( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat, int i1, int j1, int i2, int j2 ) {                
+        int pid = jogo.getMatrizPecas().getValor( i1, j1 );
+        int tipo = pecaIDUtil.getPecaTipo( pid );
+        if ( tipo != ImagemManager.REI )
+            return false;
+        
+        int cor = pecaIDUtil.getPecaCor( pid );
+        RoqueJogo roque = jogo.getRoqueJogo( cor );
+        
+        if ( roque.isRoqueDir( pecaIDUtil, mat, i2, j2 ) || roque.isRoqueDir( pecaIDUtil, mat, i2, j2 ) )
             return true;                     
-        }
+        
         return false;
     }
         

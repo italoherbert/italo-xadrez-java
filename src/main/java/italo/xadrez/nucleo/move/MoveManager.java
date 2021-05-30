@@ -39,7 +39,7 @@ public class MoveManager {
             
             RoqueJogo roque = jogo.getRoqueJogo( cor );
             if ( tipo == ImagemManager.REI ) {
-                if ( jogoManager.verificaSeRoqueJogada( roque, pecaIDUtil, mat, i2, j2, cor ) ) {
+                if ( jogoManager.verificaSeRoqueJogada( jogo, pecaIDUtil, mat, i1, j1, i2, j2 ) ) {
                     int i3 = roque.getI();
                     int i4 = roque.getI();
                     int j3, j4;

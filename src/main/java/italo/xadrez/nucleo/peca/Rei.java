@@ -30,9 +30,9 @@ public class Rei extends Peca {
         int cor = util.getPecaCor( pid );                
         RoqueJogo roque = jogo.getRoqueJogo( cor );    
         
-        if ( roque.isRoqueEsq( util, mat ) )
+        if ( roque.isRoqueEsq( util, mat, roque.getI(), 1 ) )
             lista.add( new int[] { roque.getI(), 1 } );        
-        if ( roque.isRoqueDir( util, mat ) )
+        if ( roque.isRoqueDir( util, mat, roque.getI(), 6 ) )
             lista.add( new int[] { roque.getI(), 6 } );        
         
         return lista;

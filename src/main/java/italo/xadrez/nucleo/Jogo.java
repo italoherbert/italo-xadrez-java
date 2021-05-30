@@ -10,7 +10,7 @@ public class Jogo implements MatrizInicializador {
     public final static int MAT_J_LEN = 8;
     public final static int MAT_I_LEN = 8;
     
-    public final static int QUANT_JOGADAS_PEOES_PESO_1 = 15;
+    public final static int QUANT_JOGADAS_TORRE_PESO_NEG = 15;
             
     public final static int COR_JOGADOR1 = ImagemManager.BRANCO;
     public final static int COR_JOGADOR2 = ImagemManager.PRETO;
@@ -25,7 +25,7 @@ public class Jogo implements MatrizInicializador {
     
     private int vitorias = 0;
     private int derrotas = 0;
-    private int quantJogadas = 0;
+    private int contadorJogadas = 0;
     
     private int vezJogador = COR_JOGADOR1;
     
@@ -93,7 +93,7 @@ public class Jogo implements MatrizInicializador {
     public void reinicia() {
         status = NAO_FIM_DO_JOGO;        
         vezJogador = COR_JOGADOR1;
-        quantJogadas = 0;
+        contadorJogadas = 0;
                                        
         roqueJogador1.reinicia();
         roqueJogador2.reinicia();
@@ -164,9 +164,9 @@ public class Jogo implements MatrizInicializador {
     }
         
     public void incQuantJogadas() {
-        quantJogadas++;
+        contadorJogadas++;
     }
-        
+            
     public boolean isFim() {
         return status != NAO_FIM_DO_JOGO && status != PAUSA;
     }
@@ -195,6 +195,10 @@ public class Jogo implements MatrizInicializador {
                                                    
     public int getStatus() {
         return status;
+    }
+
+    public int getContadorJogadas() {
+        return contadorJogadas;
     }
                       
     public int getVitorias() {

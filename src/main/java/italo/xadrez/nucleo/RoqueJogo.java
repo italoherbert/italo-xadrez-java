@@ -31,16 +31,16 @@ public class RoqueJogo {
         return i;
     }
 
-    public boolean isRoqueEsq(  PecaIDUtil util, Matriz mat ) {              
-        return !moveuRei && !moveuTorreEsq && 
+    public boolean isRoqueEsq( PecaIDUtil util, Matriz mat, int i2, int j2 ) {              
+        return !moveuRei && !moveuTorreEsq && i == i2 && j2 == 1 &&
                 util.getPecaTipo( mat.getValor( i, 0 ) ) == ImagemManager.TORRE &&
                 mat.getValor( i, 1 ) == Const.INT_NULO &&
                 mat.getValor( i, 2 ) == Const.INT_NULO && 
                 mat.getValor( i, 3 ) == Const.INT_NULO;
     }
 
-    public boolean isRoqueDir( PecaIDUtil util, Matriz mat ) {
-        return !moveuRei && !moveuTorreDir && 
+    public boolean isRoqueDir( PecaIDUtil util, Matriz mat, int i2, int j2 ) {
+        return !moveuRei && !moveuTorreDir && i == i2 && j2 == 6 &&
                 util.getPecaTipo( mat.getValor( i, 7 ) ) == ImagemManager.TORRE &&
                 mat.getValor( i, 5 ) == Const.INT_NULO &&
                 mat.getValor( i, 6 ) == Const.INT_NULO;

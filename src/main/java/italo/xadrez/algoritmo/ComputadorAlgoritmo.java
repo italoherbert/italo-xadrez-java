@@ -37,6 +37,7 @@ public class ComputadorAlgoritmo implements ThreadSource {
     private int ultimaJ = Const.INT_NULO;
     private int penultimaI = Const.INT_NULO;
     private int penultimaJ = Const.INT_NULO;
+    private int ultimaPID = Const.INT_NULO;
     
     private boolean esperando = false;
         
@@ -78,6 +79,8 @@ public class ComputadorAlgoritmo implements ThreadSource {
             penultimaJ = ultimaJ;
             ultimaI = i2;
             ultimaJ = j2;
+            
+            ultimaPID = jogo.getMatrizPecas().getValor( i2, j2 );
             
             tabuleiro.limpaSelecao();
             sistema.repaint();
@@ -126,33 +129,38 @@ public class ComputadorAlgoritmo implements ThreadSource {
             int j2 = jog.getJ2();
             
             boolean ehRoqueJogada = jogoManager.verificaSeRoqueJogada( jogo, pecaIDUtil, mat, i1, j1, i2, j2 );
-            if ( jog.getPeso() == jogada.getPeso() && ehRoqueJogada )
+            if ( jogada.getPeso() == jog.getPeso() && ehRoqueJogada )
                 return jog;
         }
 
         List<Jogada> lista2 = new ArrayList();
-        if ( jogo.getContadorJogadas() < Jogo.QUANT_JOGADAS_TORRE_PESO_NEG ) {
-            for( Jogada jog : lista ) {                                                    
-                int i2 = jog.getI2();
-                int j2 = jog.getJ2();
+        for( Jogada jog : lista ) {
+            int i1 = jog.getI1();
+            int j1 = jog.getJ1();
+            int i2 = jog.getI2();
+            int j2 = jog.getJ2();
+            
+            if ( jog.getPeso() < jogada.getPeso() )
+                continue;
 
-                if ( jog.getPeso() < jogada.getPeso() )
-                    continue;
+            if ( i2 == penultimaI && j2 == penultimaJ )
+                continue;                                        
 
-                if ( i2 == penultimaI && j2 == penultimaJ )
-                    continue;                                               
+            int pid = mat.getValor( i1, j1 );
+            int tipo = pecaIDUtil.getPecaTipo( pid );
+            if ( pid == ultimaPID && tipo != ImagemManager.PEAO )
+                continue;
 
-                if ( jog.getPeso() == jogada.getPeso() ) {
-                    if ( dir == 1 ) {
-                        if ( jog.getI2() > jog.getI1() )
-                            lista2.add( jog );                    
-                    } else {
-                        if ( jog.getI2() < jog.getI1() )
-                            lista2.add( jog );                        
-                    }                
-                }
+            if ( jog.getPeso() == jogada.getPeso() ) {
+                if ( dir == 1 ) {
+                    if ( jog.getI2() > jog.getI1() )
+                        lista2.add( jog );                    
+                } else {
+                    if ( jog.getI2() < jog.getI1() )
+                        lista2.add( jog );                        
+                }                
             }
-        }
+        }        
         
         if ( lista2.isEmpty() ) {
             for( Jogada jog : lista ) {                

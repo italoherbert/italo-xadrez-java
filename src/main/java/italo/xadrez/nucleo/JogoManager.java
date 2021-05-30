@@ -211,7 +211,7 @@ public class JogoManager implements PecaManager {
         int cor = pecaIDUtil.getPecaCor( pid );
         RoqueJogo roque = jogo.getRoqueJogo( cor );
         
-        if ( roque.isRoqueDir( pecaIDUtil, mat, i2, j2 ) || roque.isRoqueDir( pecaIDUtil, mat, i2, j2 ) )
+        if ( roque.isRoqueEsq( pecaIDUtil, mat, i2, j2 ) || roque.isRoqueDir( pecaIDUtil, mat, i2, j2 ) )
             return true;                     
         
         return false;

@@ -22,7 +22,7 @@ public class TextoDesenho implements Desenho {
     private final String brancaVenceuMSG = "Brancas venceram!";
     private final String empateMSG = "Houve empate!";
     private final String pauseMSG = "Pausa!";
-    private final String escParaSair = "ESQ para sair...";
+    private final String escParaSair = "ESC para sair...";
     private final String saindoMSG = "Saindo...";
     private final String esperandoCliqueOuTecle = "Clique ou tecle algo para continuar!";
     

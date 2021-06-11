@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>italo</groupId>
     <artifactId>Italo-Xadrez</artifactId>
-    <version>1.0</version>
+    <version>1.6</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -11,22 +11,16 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         
         <nome-interno>italo-xadrez</nome-interno>
-        <executavel>Italo-Xadrez-1.0.exe</executavel>
+        <executavel>Italo-Xadrez-${project.version}.exe</executavel>
         <icone>xadrez.ico</icone>
-        <main.classe>italo.xadrez.XadrezMain</main.classe>
+        <main.classe>italo.xadrez.XadrezMain</main.classe>        
         <jre.path>jre8</jre.path>
     </properties>
                         
     <build>
-        <resources>
+        <resources>            
             <resource>
-                <directory>audio</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>            
-            <resource>
-                <directory>img</directory>
+                <directory>${basedir}/src/main/resources</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
@@ -79,12 +73,12 @@
                                 <path>${jre.path}</path>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.3.0.0</fileVersion>
+                                <fileVersion>${project.version}.0.0</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>2021 Ítalo Herbert</copyright>
-                                <productVersion>1.0.0.0</productVersion>
-                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productVersion>${project.version}.0.0</productVersion>
+                                <txtProductVersion>${project.version}.0.0</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <companyName>italoinfo.com</companyName>
                                 <internalName>${nome-interno}</internalName>

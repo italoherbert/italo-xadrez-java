@@ -7,6 +7,9 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class JanelaGUI extends JFrame implements WindowListener {
@@ -28,7 +31,14 @@ public class JanelaGUI extends JFrame implements WindowListener {
         super.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         super.setSize( 750, 700 );
         super.setLocationRelativeTo( this ); 
-                
+
+        try {
+            InputStream in = JanelaGUI.class.getResourceAsStream( "/icone.png" );
+            super.setIconImage( ImageIO.read( in ) );                            
+        } catch ( IOException e ) {
+            
+        }
+        
         Container c = super.getContentPane();
         c.setLayout( card );
         c.add( CARREGANDO, carregandoDesenhoPNL );

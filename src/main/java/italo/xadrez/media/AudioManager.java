@@ -1,8 +1,8 @@
 package italo.xadrez.media;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -24,17 +24,17 @@ public class AudioManager {
     public final static int EMPATOU = 8;
     
     private final String[] audioPaths = { 
-        "audio/abertura-fundo.mid",
-        "audio/jogo-fundo.mid",
+        "/audio/abertura-fundo.mid",
+        "/audio/jogo-fundo.mid",
         
-        "audio/brancas-moveu.wav",
-        "audio/pretas-moveu.wav",
-        "audio/captura.wav",
-        "audio/xeque.wav",
+        "/audio/brancas-moveu.wav",
+        "/audio/pretas-moveu.wav",
+        "/audio/captura.wav",
+        "/audio/xeque.wav",
         
-        "audio/brancas-venceram.wav",
-        "audio/pretas-venceram.wav",
-        "audio/empatou.wav"                
+        "/audio/brancas-venceram.wav",
+        "/audio/pretas-venceram.wav",
+        "/audio/empatou.wav"                
     };
     
     private final AudioInputStream[] audioStreams = new AudioInputStream[ audioPaths.length ];
@@ -45,7 +45,7 @@ public class AudioManager {
     public void carrega( int offset, int quantPorcent ) throws CarregandoRecursoException {
         for( int i = 0; i < audioPaths.length; i++ ) {           
             try {             
-                FileInputStream in = new FileInputStream( audioPaths[ i ] );
+                InputStream in = this.getClass().getResourceAsStream( audioPaths[ i ] );
                 BufferedInputStream bufIn = new BufferedInputStream( in );
                 audioStreams[ i ] = AudioSystem.getAudioInputStream( bufIn );
 

@@ -19,7 +19,10 @@ public class JogoTecladoController implements TecladoGUIListener {
         
         switch ( tecla ) {
             case ENTER:
-                sistema.getJogo().pausaContinua();
+                if ( !sistema.getJogo().isUsuarioVersusComputador() ) {
+                    sistema.getJogo().pausaContinua();
+                    sistema.getGUI().getJanelaGUI().getJogoPNL().repaint();
+                }
                 break;
             case ESC:
                 int result = JOptionPane.showConfirmDialog( null, 

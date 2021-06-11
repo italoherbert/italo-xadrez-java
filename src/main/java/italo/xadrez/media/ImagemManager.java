@@ -3,7 +3,6 @@ package italo.xadrez.media;
 import italo.xadrez.Const;
 import java.awt.MediaTracker;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import italo.xadrez.nucleo.peca.PecaIDUtil;
@@ -26,28 +25,28 @@ public class ImagemManager implements PecaIDUtil {
     public final static int ABERTURA = 18;
     
     private final String[] imagensPaths = {        
-        "img/peao-branco.png",
-        "img/torre-branca.png",
-        "img/cavalo-branco.png",
-        "img/bispo-branco.png",
-        "img/rainha-branca.png",
-        "img/rei-branco.png",
+        "/img/peao-branco.png",
+        "/img/torre-branca.png",
+        "/img/cavalo-branco.png",
+        "/img/bispo-branco.png",
+        "/img/rainha-branca.png",
+        "/img/rei-branco.png",
         
-        "img/peao-preto.png",
-        "img/torre-preta.png",
-        "img/cavalo-preto.png",
-        "img/bispo-preto.png",
-        "img/rainha-preta.png",
-        "img/rei-preto.png",
+        "/img/peao-preto.png",
+        "/img/torre-preta.png",
+        "/img/cavalo-preto.png",
+        "/img/bispo-preto.png",
+        "/img/rainha-preta.png",
+        "/img/rei-preto.png",
 
-        "img/peao-vermelho.png",
-        "img/torre-vermelha.png",
-        "img/cavalo-vermelho.png",
-        "img/bispo-vermelho.png",
-        "img/rainha-vermelha.png",
-        "img/rei-vermelho.png",
+        "/img/peao-vermelho.png",
+        "/img/torre-vermelha.png",
+        "/img/cavalo-vermelho.png",
+        "/img/bispo-vermelho.png",
+        "/img/rainha-vermelha.png",
+        "/img/rei-vermelho.png",
         
-        "img/abertura.png"
+        "/img/abertura.png"
     };
         
     private final BufferedImage[] imagens = new BufferedImage[ imagensPaths.length ];          
@@ -57,7 +56,7 @@ public class ImagemManager implements PecaIDUtil {
     public void carregaAberturaImagem() throws CarregandoRecursoException {
         MediaTracker mt = new MediaTracker( new JPanel() );
         try {
-            mt.addImage( imagens[ ABERTURA ] = ImageIO.read( new FileInputStream( imagensPaths[ ABERTURA ] ) ), 0 );
+            mt.addImage( imagens[ ABERTURA ] = ImageIO.read( this.getClass().getResourceAsStream( imagensPaths[ ABERTURA ] ) ), 0 );
             try {
                 mt.waitForID( 0 );                  
             } catch ( InterruptedException ex ) {
@@ -84,7 +83,7 @@ public class ImagemManager implements PecaIDUtil {
     public BufferedImage carregaImagem( String imagemPath, MediaTracker mt, int id ) throws CarregandoRecursoException {               
         BufferedImage imagem = null;
         try {
-            mt.addImage( imagem = ImageIO.read( new FileInputStream( imagemPath ) ), id );
+            mt.addImage( imagem = ImageIO.read( this.getClass().getResourceAsStream( imagemPath ) ), id );
             try {
                 mt.waitForID( id );                  
             } catch ( InterruptedException ex ) {

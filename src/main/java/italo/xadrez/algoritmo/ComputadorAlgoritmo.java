@@ -116,7 +116,13 @@ public class ComputadorAlgoritmo implements ThreadSource {
         MatrizPecas mat = jogo.getMatrizPecas();
         int dir = pecaIDUtil.getPecaDirecaoPorCor( jogadorCor );
         
-        MelhorJogada melhorJogada = this.minimax( raiz, 0, true );
+        MelhorJogada alpha = new MelhorJogada();
+        alpha.setPeso( Integer.MIN_VALUE );
+        
+        MelhorJogada beta = new MelhorJogada();
+        beta.setPeso( Integer.MAX_VALUE );
+        
+        MelhorJogada melhorJogada = this.minimax(raiz, 0, alpha, beta, true );
                 
         Jogada jogada = melhorJogada.getJogada();
                                         
@@ -191,7 +197,7 @@ public class ComputadorAlgoritmo implements ThreadSource {
         return jogada;
     }
                 
-    public MelhorJogada minimax( Jogada jogada, int nivel, boolean max ) {                
+    public MelhorJogada minimax( Jogada jogada, int nivel, MelhorJogada alpha, MelhorJogada beta, boolean maximizador ) {                
         if ( jogada.getJogadas().isEmpty() ) {
             MelhorJogada mj = new MelhorJogada();
             mj.setJogada( jogada ); 
@@ -199,37 +205,53 @@ public class ComputadorAlgoritmo implements ThreadSource {
             return mj;
         }
         
-        if ( max ) {
-            int melhorPeso = Integer.MIN_VALUE;
-            Jogada melhorJogada = null;
+        if ( maximizador ) {
+            MelhorJogada v = new MelhorJogada();
+            v.setPeso( Integer.MIN_VALUE ); 
+            v.setJogada( jogada.getJogadas().get( 0 ) );
+            
             for( Jogada jog : jogada.getJogadas() ) {
-                MelhorJogada melhor = this.minimax( jog, nivel+1, !max );                                                                                    
-                if ( melhor.getPeso() > melhorPeso ) {
-                    melhorJogada = jog;
-                    melhorPeso = melhor.getPeso();                
-                }
+                MelhorJogada melhor = this.minimax( jog, nivel+1, alpha, beta, !maximizador );                                                                                                                                    
+                if ( melhor.getPeso() > v.getPeso() ) {                    
+                    MelhorJogada mj = new MelhorJogada();
+                    mj.setJogada( jog ); 
+                    mj.setPeso( melhor.getPeso() );
+                    v = mj;                                                                                           
+                }                                              
                 
-                if ( nivel == 0 )
+                if ( nivel == 0 ) {
                     jog.setPeso( melhor.getPeso() );
-            }            
-            MelhorJogada mj = new MelhorJogada();
-            mj.setJogada( melhorJogada ); 
-            mj.setPeso( melhorPeso );        
-            return mj;
+                } else {                                                                                                      
+                    if ( v.getPeso() > alpha.getPeso() )
+                        alpha = v;
+                    
+                    if ( v.getPeso() >= beta.getPeso() )
+                        break;
+                }
+            }                                
+            return v;
         } else {
-            int melhorPeso = Integer.MAX_VALUE;
-            Jogada melhorJogada = null;
-             for( Jogada jog : jogada.getJogadas() ) {
-                MelhorJogada melhor = this.minimax( jog, nivel+1, !max );                                                                                    
-                if ( melhor.getPeso() < melhorPeso ) {
-                    melhorJogada = jog;
-                    melhorPeso = melhor.getPeso();                
-                }                
-            }            
-            MelhorJogada mj = new MelhorJogada();
-            mj.setJogada( melhorJogada ); 
-            mj.setPeso( melhorPeso );        
-            return mj;
+            MelhorJogada v = new MelhorJogada();
+            v.setPeso( Integer.MAX_VALUE ); 
+            v.setJogada( jogada.getJogadas().get( 0 ) );
+
+            for( Jogada jog : jogada.getJogadas() ) {
+                MelhorJogada melhor = this.minimax( jog, nivel+1, alpha, beta, !maximizador );                                                                                                                                                                                   
+                                
+                if ( melhor.getPeso() < v.getPeso() ) {                    
+                    MelhorJogada mj = new MelhorJogada();
+                    mj.setJogada( jog ); 
+                    mj.setPeso( melhor.getPeso() );
+                    v = mj;                                                                           
+                }                                         
+
+                if ( v.getPeso() < beta.getPeso() )
+                    beta = v;
+                
+                if ( v.getPeso() <= alpha.getPeso() )
+                    break;                                
+            }                               
+            return v;
         }        
     }
     

@@ -14,6 +14,8 @@ public interface PecaIDUtil {
     
     public int getPecaCorOposta( int pecaID );
     
+    public int getCorOposta( int cor );
+    
     public int converteParaVermelhoPecaID( int pecaID );
     
     public int transformaEmRainha( int pecaID );

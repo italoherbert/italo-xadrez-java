@@ -124,6 +124,7 @@ public class ImagemManager implements PecaIDUtil {
         return this.getPecaDirecaoPorCor( cor );
     }
     
+    @Override
     public int getPecaDirecaoPorCor( int cor ) {
         return ( cor == PRETO ? 1 : -1 );
     }
@@ -143,6 +144,11 @@ public class ImagemManager implements PecaIDUtil {
         if ( pecaID >= BRANCO )
             return BRANCO;        
         return INT_NULO;
+    }
+    
+    @Override
+    public int getCorOposta( int cor ) {
+        return ( cor == PRETO ? BRANCO : PRETO );
     }
     
     @Override

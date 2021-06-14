@@ -33,7 +33,8 @@ public class JogoCtrl {
                     jogo.venceu( Jogo.COR_JOGADOR2 );
 
                 if ( !perdeu ) {
-                    boolean empate = jogoManager.verificaSeEmpate( jogo, pecaIDUtil, mat, jogo.getVezJogador() );
+                    int outroJogador = pecaIDUtil.getCorOposta( jogo.getVezJogador() );
+                    boolean empate = jogoManager.verificaSeEmpate( jogo, pecaIDUtil, mat, outroJogador );
 
                     if ( empate ) {
                         jogo.empate();

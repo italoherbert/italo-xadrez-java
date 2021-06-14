@@ -23,6 +23,26 @@ public class JogoManager implements PecaManager {
     private final Rainha rainha = new Rainha();
     private final Rei rei = new Rei();
                 
+    public int contaNumJogadasPossiveis( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat ) {
+        int cont = 0;
+        for( int i = 0; i < 8; i++ ) {
+            for( int j = 0; j < 8; j++ ) {
+                int pid = mat.getValor( i, j );
+                if ( pid == Const.INT_NULO )
+                    continue;
+                
+                int tipo = pecaIDUtil.getPecaTipo( pid );
+                int dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
+                Peca peca = this.getPeca( tipo );                 
+                if ( peca != null ) {
+                    int[][] movs = peca.movimentosValidos( jogo, this, pecaIDUtil, mat, i, j, dir );
+                    cont += movs.length;
+                }
+            }
+        }
+        return cont;
+    }
+    
     public boolean ehMovePosic( int[][] movs, int i, int j ) {
         for( int[] mov : movs )
             if ( mov[ 0 ] == i && mov[ 1 ] == j )

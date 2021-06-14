@@ -25,6 +25,8 @@ public class ComputadorAlgoritmo implements ThreadSource {
     public final static int MEDIANO = 3;
     public final static int DIFICIL = 4;
     
+    public final static int NIVEL4_QUANT_JOGADAS_LIMITE = 100;
+    
     private final Sistema sistema;
     private final LinkedList<Jogada> jogadasList = new LinkedList();
     private final Random random = new Random();
@@ -58,7 +60,9 @@ public class ComputadorAlgoritmo implements ThreadSource {
         Jogada jogadaRaiz = new Jogada();
         jogadaRaiz.setPeso( 0 ); 
         
-        this.executaJogadas( jogadaRaiz, jogadorCor, nivel, true );                        
+        int nivelOtimizado = this.nivelOtimizado();
+                        
+        this.executaJogadas( jogadaRaiz, jogadorCor, nivelOtimizado, true );                        
         
         Jogada melhorJogada = this.melhorJogada( jogadaRaiz );
         
@@ -106,6 +110,21 @@ public class ComputadorAlgoritmo implements ThreadSource {
             esperando = false;
             notifyAll();
         }
+    }
+    
+    public int nivelOtimizado() {
+        if ( nivel < 4 )
+            return nivel;
+        
+        PecaIDUtil pecaIDUtil = sistema.getPecaIDUtil();
+        Jogo jogo = sistema.getJogo();
+        Matriz mat = jogo.getMatrizPecas();
+        
+        int cont = sistema.getJogoManager().contaNumJogadasPossiveis( jogo, pecaIDUtil, mat );
+        if ( cont <= NIVEL4_QUANT_JOGADAS_LIMITE )
+            return nivel;
+        
+        return nivel-1;
     }
         
     public Jogada melhorJogada( Jogada raiz ) {

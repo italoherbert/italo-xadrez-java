@@ -15,7 +15,6 @@ import italo.xadrez.ctrl.JogoCtrl;
 import italo.xadrez.desenho.JogoDesenho;
 import italo.xadrez.desenho.TelaInicialDesenho;
 import italo.xadrez.gui.GUI;
-import italo.xadrez.gui.desenho.TecladoGUIListener;
 import italo.xadrez.media.CarregandoRecursoException;
 import italo.xadrez.media.MediaCarregador;
 import italo.xadrez.media.MediaManager;

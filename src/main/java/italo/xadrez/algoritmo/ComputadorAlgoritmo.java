@@ -25,8 +25,8 @@ public class ComputadorAlgoritmo implements ThreadSource {
     public final static int MEDIANO = 3;
     public final static int DIFICIL = 4;
     
-    public final static int NIVEL4_QUANT_JOGADAS_LIMITE = 100;
-    
+    public final static int LIMIAR_MAX_FILHOS = 10000;
+        
     private final Sistema sistema;
     private final LinkedList<Jogada> jogadasList = new LinkedList();
     private final Random random = new Random();
@@ -39,9 +39,10 @@ public class ComputadorAlgoritmo implements ThreadSource {
     private int ultimaJ = Const.INT_NULO;
     private int penultimaI = Const.INT_NULO;
     private int penultimaJ = Const.INT_NULO;
-    private int ultimaPID = Const.INT_NULO;
+    private int ultimaPID = Const.INT_NULO;    
     
     private boolean esperando = false;
+    private boolean calculoMelhorJogadaMuitoLongo = false;
         
     public ComputadorAlgoritmo( Sistema sistema, int jogadorCor ) {
         this.sistema = sistema;
@@ -57,14 +58,7 @@ public class ComputadorAlgoritmo implements ThreadSource {
         
         Tabuleiro tabuleiro = sistema.getTabuleiro();
                 
-        Jogada jogadaRaiz = new Jogada();
-        jogadaRaiz.setPeso( 0 ); 
-        
-        int nivelOtimizado = this.nivelOtimizado();
-                        
-        this.executaJogadas( jogadaRaiz, jogadorCor, nivelOtimizado, true );                        
-        
-        Jogada melhorJogada = this.melhorJogada( jogadaRaiz );
+        Jogada melhorJogada = this.melhorJogada();
         
         System.gc();
                 
@@ -111,23 +105,8 @@ public class ComputadorAlgoritmo implements ThreadSource {
             notifyAll();
         }
     }
-    
-    public int nivelOtimizado() {
-        if ( nivel < 4 )
-            return nivel;
-        
-        PecaIDUtil pecaIDUtil = sistema.getPecaIDUtil();
-        Jogo jogo = sistema.getJogo();
-        Matriz mat = jogo.getMatrizPecas();
-        
-        int cont = sistema.getJogoManager().contaNumJogadasPossiveis( jogo, pecaIDUtil, mat );
-        if ( cont <= NIVEL4_QUANT_JOGADAS_LIMITE )
-            return nivel;
-        
-        return nivel-1;
-    }
-        
-    public Jogada melhorJogada( Jogada raiz ) {
+                    
+    public Jogada melhorJogada() {                
         JogoManager jogoManager = sistema.getJogoManager();
         PecaIDUtil pecaIDUtil = sistema.getPecaIDUtil();
 
@@ -141,10 +120,12 @@ public class ComputadorAlgoritmo implements ThreadSource {
         MelhorJogada beta = new MelhorJogada();
         beta.setPeso( Integer.MAX_VALUE );
         
-        MelhorJogada melhorJogada = this.minimax(raiz, 0, alpha, beta, true );
+        Jogada raiz = this.jogadaRaiz();        
+
+        MelhorJogada melhorJogada = this.minimax( raiz, 0, alpha, beta, true );
                 
         Jogada jogada = melhorJogada.getJogada();
-                                        
+                                                
         List<Jogada> lista = raiz.getJogadas();
         
         for( Jogada jog : lista ) {
@@ -215,6 +196,23 @@ public class ComputadorAlgoritmo implements ThreadSource {
         
         return jogada;
     }
+    
+    public Jogada jogadaRaiz() {                
+        Jogada jogadaRaiz = null; 
+         
+        this.calculoMelhorJogadaMuitoLongo = true;
+        int n = nivel;
+        while ( this.calculoMelhorJogadaMuitoLongo ) {
+            jogadaRaiz = new Jogada();
+            jogadaRaiz.setPeso( 0 );
+            
+            this.calculoMelhorJogadaMuitoLongo = false;
+            this.executaJogadas( jogadaRaiz, jogadorCor, n, true, 1 );             
+            n--;
+        }
+        
+        return jogadaRaiz;
+    }
                 
     public MelhorJogada minimax( Jogada jogada, int nivel, MelhorJogada alpha, MelhorJogada beta, boolean maximizador ) {                
         if ( jogada.getJogadas().isEmpty() ) {
@@ -274,15 +272,15 @@ public class ComputadorAlgoritmo implements ThreadSource {
         }        
     }
     
-    public void executaJogadas( Jogada jogada, int c, int nivel, boolean max ) {       
-        if ( nivel <= 0 )
+    public void executaJogadas( Jogada jogada, int c, int nivel, boolean max, int quant ) {    
+        if ( nivel <= 0 || calculoMelhorJogadaMuitoLongo )
             return;
-                        
+                                                        
         JogoManager jogoManager = sistema.getJogoManager();
         PecaIDUtil pecaIDUtil = sistema.getPecaIDUtil();
         Jogo jogo = sistema.getJogo();
                                 
-        jogo.getMatrizPecas().copia( jogo.getMatrizAux());
+        jogo.getMatrizPecas().copia( jogo.getMatrizAux() );
         Matriz mat = jogo.getMatrizAux(); 
         this.carrega( mat, jogada ); 
         
@@ -304,7 +302,12 @@ public class ComputadorAlgoritmo implements ThreadSource {
                                 
                 Peca peca = jogoManager.getPeca( tipo );
                                                 
-                int[][] movs = peca.movimentosValidos( jogo, jogoManager, pecaIDUtil, mat, i, j, dir );                
+                int[][] movs = peca.movimentosValidos( jogo, jogoManager, pecaIDUtil, mat, i, j, dir );                                                                    
+                if ( ( quant * movs.length ) > LIMIAR_MAX_FILHOS ) {
+                    calculoMelhorJogadaMuitoLongo = true;
+                    return;                              
+                }
+                
                 for( int[] mov : movs ) {                                                            
                     int movI = mov[ 0 ];
                     int movJ = mov[ 1 ];
@@ -395,7 +398,7 @@ public class ComputadorAlgoritmo implements ThreadSource {
                     jogada.addJogada( jog );                                        
                     
                     if ( !xequeMate && !empate )
-                        this.executaJogadas( jog, corOposta, nivel-1, !max );
+                        this.executaJogadas( jog, corOposta, nivel-1, !max, quant * movs.length );                                        
                                         
                     mat.setValor( i, j, pid );
                     mat.setValor( movI, movJ, pid2 );                
@@ -414,9 +417,9 @@ public class ComputadorAlgoritmo implements ThreadSource {
                             mat.setValor( roqueI, 5, Const.INT_NULO ); 
                         }
                     }
-                }                
+                }                           
             }
-        }
+        }        
     }
                         
     public void carrega( Matriz mat, Jogada jogada ) {        
@@ -432,7 +435,6 @@ public class ComputadorAlgoritmo implements ThreadSource {
             mat.setValor( jog.getI2(), jog.getJ2(), mat.getValor( jog.getI1(), jog.getJ1() ) );
             mat.setValor( jog.getI1(), jog.getJ1(), Const.INT_NULO );
         }
-            
     }
                 
     public boolean isJogando() {

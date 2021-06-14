@@ -54,7 +54,7 @@ public class Jogo implements MatrizInicializador {
         for( int i = 0; i < matriz.length; i++ )
             for( int j = 0; j < matriz[i].length; j++ )
                 matriz[ i ][ j ] = Const.INT_NULO;        
-        
+               
         matriz[ 7 ][ 0 ] = ImagemManager.BRANCO + ImagemManager.TORRE;
         matriz[ 7 ][ 1 ] = ImagemManager.BRANCO + ImagemManager.CAVALO;
         matriz[ 7 ][ 2 ] = ImagemManager.BRANCO + ImagemManager.BISPO;
@@ -87,7 +87,7 @@ public class Jogo implements MatrizInicializador {
         matriz[ 0 ][ 4 ] = ImagemManager.PRETO + ImagemManager.REI;
         matriz[ 0 ][ 5 ] = ImagemManager.PRETO + ImagemManager.BISPO;
         matriz[ 0 ][ 6 ] = ImagemManager.PRETO + ImagemManager.CAVALO;
-        matriz[ 0 ][ 7 ] = ImagemManager.PRETO + ImagemManager.TORRE;
+        matriz[ 0 ][ 7 ] = ImagemManager.PRETO + ImagemManager.TORRE;        
     }
             
     public void reinicia() {

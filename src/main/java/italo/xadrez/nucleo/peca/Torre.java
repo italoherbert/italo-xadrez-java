@@ -2,16 +2,13 @@ package italo.xadrez.nucleo.peca;
 
 import italo.xadrez.Const;
 import italo.xadrez.nucleo.Jogo;
-import java.util.LinkedList;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
 
 public class Torre extends Peca {
 
     @Override
-    public List<int[]> movimentosValidos2( Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                
-        LinkedList<int[]> lista = new LinkedList<>();
-        
+    public void movimentosValidos2( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                        
         int pid = mat.getValor( i, j );
         boolean fim = false;
         for( int k = i+1; !fim && k < 8; k++ ) {
@@ -56,9 +53,7 @@ public class Torre extends Peca {
                 lista.add( new int[] { i, k } );                                                                                     
                 fim = ( pid2 != Const.INT_NULO ); 
             }
-        } 
-        
-        return lista;
+        }         
     }
 
 }

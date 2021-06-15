@@ -1,4 +1,4 @@
-package italo.xadrez.algoritmo.computador;
+package italo.xadrez.algoritmo.computador.to;
 
 import java.util.LinkedList;
 import java.util.List;

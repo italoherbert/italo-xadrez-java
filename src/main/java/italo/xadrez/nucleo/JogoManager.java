@@ -13,6 +13,7 @@ import italo.xadrez.nucleo.peca.Rei;
 import italo.xadrez.nucleo.peca.Torre;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
+import java.util.LinkedList;
 
 public class JogoManager implements PecaManager {
     
@@ -25,6 +26,7 @@ public class JogoManager implements PecaManager {
                 
     public int contaNumJogadasPossiveis( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat ) {
         int cont = 0;
+        List<int[]> lista = new LinkedList();
         for( int i = 0; i < 8; i++ ) {
             for( int j = 0; j < 8; j++ ) {
                 int pid = mat.getValor( i, j );
@@ -35,31 +37,31 @@ public class JogoManager implements PecaManager {
                 int dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
                 Peca peca = this.getPeca( tipo );                 
                 if ( peca != null ) {
-                    int[][] movs = peca.movimentosValidos( jogo, this, pecaIDUtil, mat, i, j, dir );
-                    cont += movs.length;
+                    peca.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, i, j, dir );
+                    cont += lista.size();
+                    
+                    lista.clear();
                 }
             }
         }
         return cont;
     }
     
-    public boolean ehMovePosic( int[][] movs, int i, int j ) {
+    public boolean ehMovePosic( List<int[]> movs, int i, int j ) {
         for( int[] mov : movs )
             if ( mov[ 0 ] == i && mov[ 1 ] == j )
                 return true;        
         return false;
     }
     
-    public int[][] movimentosValidos( Jogo jogo, PecaIDUtil util, Matriz mat, int matI, int matJ ) {
+    public void movimentosValidos( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int matI, int matJ ) {
         int pecaID = mat.getValor( matI, matJ );
         int tipo = util.getPecaTipo( pecaID );
         int dir = util.getPecaDirecaoPorPID( pecaID );
         
         Peca peca = this.getPeca( tipo );                 
         if ( peca != null )
-            return peca.movimentosValidos( jogo, this, util, mat, matI, matJ, dir );        
-        
-        return new int[][] {};
+            peca.movimentosValidos( lista, jogo, this, util, mat, matI, matJ, dir );                
     }        
              
     public boolean sofreuXequeMate( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat, int c ) {        
@@ -74,8 +76,11 @@ public class JogoManager implements PecaManager {
             int pid = mat.getValor( reiI, reiJ );
             int dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
             
-            int[][] lista = rei.movimentosValidos( jogo, this, pecaIDUtil, mat, reiI, reiJ, dir );
-            if ( lista.length == 0 ) {
+            List<int[]> lista = new LinkedList();
+        
+            rei.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, reiI, reiJ, dir );
+            if ( lista.isEmpty() ) {                
+                lista.clear();
                 for( int i = 0; i < 8; i++ ) {
                     for( int j = 0; j < 8; j++ ) {
                         pid = mat.getValor( i, j );
@@ -89,10 +94,14 @@ public class JogoManager implements PecaManager {
                         int tipo = pecaIDUtil.getPecaTipo( pid );
                         dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
                         
-                        Peca peca = this.getPeca( tipo );
-                        lista = peca.movimentosValidos( jogo, this, pecaIDUtil, mat, i, j, dir );
-                        if ( lista.length > 0 )
+                        Peca peca = this.getPeca( tipo );                        
+
+                        peca.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, i, j, dir );
+                        if ( !lista.isEmpty() ) {
+                            lista.clear();
                             return false;
+                        }                        
+                        lista.clear();
                     }
                 }          
                 return true;
@@ -103,6 +112,7 @@ public class JogoManager implements PecaManager {
     }
     
     public boolean verificaSeEmpate( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat, int c ) {        
+        List<int[]> movs = new LinkedList();
         for( int i = 0; i < 8; i++ ) {
             for( int j = 0; j < 8; j++ ) {
                 int pid = mat.getValor( i, j );
@@ -117,9 +127,12 @@ public class JogoManager implements PecaManager {
                 int dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
                 Peca peca = this.getPeca( tipo );
                 
-                int[][] movs = peca.movimentosValidos( jogo, this, pecaIDUtil, mat, i, j, dir );
-                if ( movs.length > 0 )
+                peca.movimentosValidos( movs, jogo, this, pecaIDUtil, mat, i, j, dir );
+                if ( !movs.isEmpty() ) {
+                    movs.clear();
                     return false;
+                }                
+                movs.clear();
             }            
         }
         return true;        
@@ -138,8 +151,8 @@ public class JogoManager implements PecaManager {
         int dir = util.getPecaDirecaoPorPID( pid );
         int opostaCor = util.getPecaCorOposta( pid );
                 
-        List<int[]> lista = rainha.movimentosValidos2( jogo, util, mat, reiI, reiJ, dir );
-        
+        List<int[]> lista = new LinkedList();        
+        rainha.movimentosValidos2( lista, jogo, util, mat, reiI, reiJ, dir );        
         for( int[] mov : lista ) {
             int movI = mov[ 0 ];
             int movJ = mov[ 1 ];
@@ -165,8 +178,9 @@ public class JogoManager implements PecaManager {
                 if ( tipo2 == ImagemManager.REI )
                     return true;            
         }
-        
-        lista = cavalo.movimentosValidos2( jogo, util, mat, reiI, reiJ, dir );
+
+        lista.clear();
+        cavalo.movimentosValidos2( lista, jogo, util, mat, reiI, reiJ, dir );
         for( int[] mov : lista ) {
             int movI = mov[ 0 ];
             int movJ = mov[ 1 ];
@@ -213,9 +227,15 @@ public class JogoManager implements PecaManager {
                 
                 if ( tipo != ImagemManager.REI && c == cor ) {
                     Peca peca = this.getPeca( tipo );
-                    int[][] movs = peca.movimentosValidos( jogo, this, pecaIDUtil, mat, i, j, dir );
-                    if ( movs.length > 0 )
+                    
+                    List<int[]> lista = new LinkedList();
+                    peca.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, i, j, dir );
+                    if ( !lista.isEmpty() ) {
+                        lista.clear();
                         return false;
+                    }
+                    
+                    lista.clear();
                 }                                
             }
         }        

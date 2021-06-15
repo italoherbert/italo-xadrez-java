@@ -1,16 +1,13 @@
 package italo.xadrez.nucleo.peca;
 
 import italo.xadrez.nucleo.Jogo;
-import java.util.LinkedList;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
 
 public class Cavalo extends Peca {
 
     @Override
-    public List<int[]> movimentosValidos2( Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                
-        LinkedList<int[]> lista = new LinkedList<>();
-        
+    public void movimentosValidos2( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                        
         int pid = mat.getValor( i, j );
         
         if ( i - 2 >= 0 && j - 1 >= 0 ) {
@@ -52,9 +49,7 @@ public class Cavalo extends Peca {
             int pid2 = mat.getValor( i+1, j+2 );
             if ( !util.mesmaCor( pid, pid2 ) )
                 lista.add( new int[] { i+1, j+2 } );
-        }        
-        
-        return lista;
+        }                
     }
        
 }

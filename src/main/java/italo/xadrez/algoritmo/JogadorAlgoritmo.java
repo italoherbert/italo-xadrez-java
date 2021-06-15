@@ -2,13 +2,15 @@ package italo.xadrez.algoritmo;
 
 import italo.xadrez.Const;
 import italo.xadrez.Sistema;
-import italo.xadrez.algoritmo.computador.ThreadSourceAlgoritmo;
+import italo.xadrez.algoritmo.computador.to.ThreadSourceAlgoritmo;
 import italo.xadrez.nucleo.move.ThreadSource;
 import italo.xadrez.nucleo.Jogo;
 import italo.xadrez.nucleo.JogoManager;
 import italo.xadrez.nucleo.Tabuleiro;
 import italo.xadrez.nucleo.peca.PecaIDUtil;
 import italo.xadrez.nucleo.mat.Matriz;
+import java.util.LinkedList;
+import java.util.List;
 
 public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
     
@@ -22,6 +24,9 @@ public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
     }
     
     public void joga( int mouseX, int mouseY ) {
+        if ( !sistema.getTabuleiro().isTabuleiroPosic( mouseX, mouseY ) )
+            return;
+        
         Jogo jogo = sistema.getJogo();
         if ( jogando || computador.isJogando() || jogo.isFim() )
             return;
@@ -37,8 +42,9 @@ public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
         int selecionadaMatI = tabuleiro.getSelecionadaMatI();
         int selecionadaMatJ = tabuleiro.getSelecionadaMatJ();
             
-        if ( tabuleiro.getSelecionadaMatI() != Tabuleiro.NULO ) {                        
-            int[][] movs = jogoManager.movimentosValidos( jogo, pecaIDUtil, mat, selecionadaMatI, selecionadaMatJ );        
+        if ( tabuleiro.getSelecionadaMatI() != Tabuleiro.NULO ) {   
+            List<int[]> movs = new LinkedList();
+            jogoManager.movimentosValidos( movs, jogo, pecaIDUtil, mat, selecionadaMatI, selecionadaMatJ );        
             
             if ( jogoManager.ehMovePosic( movs, matI, matJ ) ) {                                
                 int i1 = selecionadaMatI;
@@ -67,6 +73,7 @@ public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
                 }
                 sistema.repaint();
             }             
+            movs.clear();
         } else if( matI != Const.INT_NULO ) {
             if ( mat.getValor( matI, matJ ) == Const.INT_NULO ) {
                 tabuleiro.limpaSelecao();

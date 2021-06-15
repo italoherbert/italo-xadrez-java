@@ -1,4 +1,4 @@
-package italo.xadrez.algoritmo.computador;
+package italo.xadrez.algoritmo.computador.to;
 
 public class MelhorJogada {
     

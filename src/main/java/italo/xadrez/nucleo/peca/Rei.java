@@ -3,16 +3,13 @@ package italo.xadrez.nucleo.peca;
 import italo.xadrez.nucleo.RoqueJogo;
 import italo.xadrez.Const;
 import italo.xadrez.nucleo.Jogo;
-import java.util.LinkedList;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
 
 public class Rei extends Peca {
     
-   @Override
-    public List<int[]> movimentosValidos2( Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                
-        LinkedList<int[]> lista = new LinkedList<>();
-        
+    @Override
+    public void movimentosValidos2( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                        
         int pid = mat.getValor( i, j );
         for( int k = -1; k <= 1; k++ ) {
             for( int n = -1; n <= 1; n++ ) {
@@ -33,9 +30,7 @@ public class Rei extends Peca {
         if ( roque.isRoqueEsq( util, mat, roque.getI(), 1 ) )
             lista.add( new int[] { roque.getI(), 1 } );        
         if ( roque.isRoqueDir( util, mat, roque.getI(), 6 ) )
-            lista.add( new int[] { roque.getI(), 6 } );        
-        
-        return lista;
+            lista.add( new int[] { roque.getI(), 6 } );                
     }
                     
 }

@@ -2,16 +2,13 @@ package italo.xadrez.nucleo.peca;
 
 import italo.xadrez.Const;
 import italo.xadrez.nucleo.Jogo;
-import java.util.LinkedList;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
 
 public class Bispo extends Peca {
 
     @Override
-    public List<int[]> movimentosValidos2( Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                
-        LinkedList<int[]> lista = new LinkedList<>();
-        
+    public void movimentosValidos2( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                        
         int pid = mat.getValor( i, j );
         
         boolean fim = false;
@@ -73,9 +70,7 @@ public class Bispo extends Peca {
             } else {
                 fim = true;
             } 
-        }        
-        
-        return lista;
+        }                
     }
 
 }

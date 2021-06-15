@@ -10,13 +10,9 @@ public class Rainha extends Peca {
     private final Bispo bispo = new Bispo();
 
     @Override
-    public List<int[]> movimentosValidos2( Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                        
-        List<int[]> lista1 = torre.movimentosValidos2( jogo, util, mat, i, j, direcao );
-        List<int[]> lista2 = bispo.movimentosValidos2( jogo, util, mat, i, j, direcao );        
-                
-        lista1.addAll( lista2 );        
-        
-        return lista1;
+    public void movimentosValidos2( List<int[]> lista, Jogo jogo, PecaIDUtil util, Matriz mat, int i, int j, int direcao ) {                                        
+        torre.movimentosValidos2( lista, jogo, util, mat, i, j, direcao );
+        bispo.movimentosValidos2( lista, jogo, util, mat, i, j, direcao );                        
     }
     
 }

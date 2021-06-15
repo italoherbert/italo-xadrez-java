@@ -14,6 +14,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TabuleiroDesenho implements Desenho, Tabuleiro {
     
@@ -51,7 +53,7 @@ public class TabuleiroDesenho implements Desenho, Tabuleiro {
         
         Matriz mat = jogo.getMatrizDesenho();
         
-        int[][] movsArray = {};
+        List<int[]> movsLista = new LinkedList();
         
         int w = tela.getLargura();
         int h = tela.getAltura();                             
@@ -78,7 +80,7 @@ public class TabuleiroDesenho implements Desenho, Tabuleiro {
             int pid = mat.getValor( selecionadaMatI, selecionadaMatJ );
             cor = imagemManager.getPecaCor( pid );
 
-            movsArray = jogoManager.movimentosValidos( jogo, imagemManager, mat, selecionadaMatI, selecionadaMatJ );        
+            jogoManager.movimentosValidos( movsLista, jogo, imagemManager, mat, selecionadaMatI, selecionadaMatJ );        
         }        
         
         boolean gray = true;
@@ -86,7 +88,7 @@ public class TabuleiroDesenho implements Desenho, Tabuleiro {
             for( int j = 0; j < 8; j++ ) {                
                 Color color = null;
 
-                boolean ehCapPosic = jogoManager.ehMovePosic( movsArray, i, j );
+                boolean ehCapPosic = jogoManager.ehMovePosic( movsLista, i, j );
                 if ( jogo.isUsuarioVersusComputador() ) {
                     if ( cor == Jogo.COR_JOGADOR1 && 
                             ( ( i == selecionadaMatI && j == selecionadaMatJ ) || ehCapPosic ) ) {
@@ -118,7 +120,7 @@ public class TabuleiroDesenho implements Desenho, Tabuleiro {
             g2d.setColor( Color.BLACK );
             for( int i = 0; i < 8; i++ ) {
                 for( int j = 0; j < 8; j++ ) {
-                    boolean ehCapPosic = jogoManager.ehMovePosic( movsArray, i, j );
+                    boolean ehCapPosic = jogoManager.ehMovePosic(movsLista, i, j );
                     if ( ( i == selecionadaMatI && j == selecionadaMatJ ) || ehCapPosic ) {
                         g2d.drawRect( tx+(j*cw), ty+(i*ch), cw, ch );                          
                     }
@@ -161,6 +163,11 @@ public class TabuleiroDesenho implements Desenho, Tabuleiro {
         selecionadaDeslocX = deslocX;
         selecionadaDeslocY = deslocY;
     }
+
+    @Override
+    public boolean isTabuleiroPosic(int x, int y) {
+        return ( x >= tx && x < tx+tw && y >= ty && y < ty+th );
+    }    
 
     @Override
     public int getTX() {

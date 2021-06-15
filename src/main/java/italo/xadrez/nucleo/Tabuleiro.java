@@ -17,6 +17,8 @@ public interface Tabuleiro {
     public int getCelulaH();
         
     public void limpaSelecao();
+    
+    public boolean isTabuleiroPosic( int x, int y );
                     
     public void setSelecionadaDesloc( int deslocX, int deslocY );
     

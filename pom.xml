@@ -14,7 +14,7 @@
         <executavel>Italo-Xadrez-${project.version}.exe</executavel>
         <icone>xadrez.ico</icone>
         <main.classe>italo.xadrez.XadrezMain</main.classe>        
-        <jre.path>jre8</jre.path>
+        <jre.path></jre.path>
     </properties>
                         
     <build>

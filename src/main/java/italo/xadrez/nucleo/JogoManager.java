@@ -13,7 +13,7 @@ import italo.xadrez.nucleo.peca.Rei;
 import italo.xadrez.nucleo.peca.Torre;
 import java.util.List;
 import italo.xadrez.nucleo.mat.Matriz;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class JogoManager implements PecaManager {
     
@@ -26,7 +26,7 @@ public class JogoManager implements PecaManager {
                 
     public int contaNumJogadasPossiveis( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat ) {
         int cont = 0;
-        List<int[]> lista = new LinkedList();
+        List<int[]> lista = new ArrayList();
         for( int i = 0; i < 8; i++ ) {
             for( int j = 0; j < 8; j++ ) {
                 int pid = mat.getValor( i, j );
@@ -76,7 +76,7 @@ public class JogoManager implements PecaManager {
             int pid = mat.getValor( reiI, reiJ );
             int dir = pecaIDUtil.getPecaDirecaoPorPID( pid );
             
-            List<int[]> lista = new LinkedList();
+            List<int[]> lista = new ArrayList();
         
             rei.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, reiI, reiJ, dir );
             if ( lista.isEmpty() ) {                
@@ -112,7 +112,7 @@ public class JogoManager implements PecaManager {
     }
     
     public boolean verificaSeEmpate( Jogo jogo, PecaIDUtil pecaIDUtil, Matriz mat, int c ) {        
-        List<int[]> movs = new LinkedList();
+        List<int[]> movs = new ArrayList();
         for( int i = 0; i < 8; i++ ) {
             for( int j = 0; j < 8; j++ ) {
                 int pid = mat.getValor( i, j );
@@ -151,7 +151,7 @@ public class JogoManager implements PecaManager {
         int dir = util.getPecaDirecaoPorPID( pid );
         int opostaCor = util.getPecaCorOposta( pid );
                 
-        List<int[]> lista = new LinkedList();        
+        List<int[]> lista = new ArrayList();        
         rainha.movimentosValidos2( lista, jogo, util, mat, reiI, reiJ, dir );        
         for( int[] mov : lista ) {
             int movI = mov[ 0 ];
@@ -228,7 +228,7 @@ public class JogoManager implements PecaManager {
                 if ( tipo != ImagemManager.REI && c == cor ) {
                     Peca peca = this.getPeca( tipo );
                     
-                    List<int[]> lista = new LinkedList();
+                    List<int[]> lista = new ArrayList();
                     peca.movimentosValidos( lista, jogo, this, pecaIDUtil, mat, i, j, dir );
                     if ( !lista.isEmpty() ) {
                         lista.clear();

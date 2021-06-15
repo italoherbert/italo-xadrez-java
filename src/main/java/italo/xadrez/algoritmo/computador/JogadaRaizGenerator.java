@@ -52,14 +52,13 @@ public class JogadaRaizGenerator implements Runnable, ArvoreBuilderFinalizador {
         long ms2 = ms;
         while( !parar && (ms2 - ms) <= tempoTolerancia ) {
             try {
-                Thread.sleep( 1 ); 
+                Thread.sleep( 10 ); 
             } catch( InterruptedException e ) {
                 
             }
             ms2 = System.currentTimeMillis();
         }
      
-        System.out.println( ms2 - ms );
         finalizar = ( ms2 - ms ) > tempoTolerancia;
     }
 

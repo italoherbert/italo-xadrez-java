@@ -25,12 +25,24 @@ public class TelaInicialDesenho implements Desenho {
             return;
                 
         int w = tela.getLargura();
-        int h = tela.getAltura();
+        int h = tela.getAltura();                        
         int iw = img.getWidth( obs );
         int ih = img.getHeight( obs );
+        
+        double s = 1.0d;
+        if( iw > w )
+            s *= (double)w/(double)iw;        
+        
+        if ( ih > h )
+            s *= (double)h/(double)ih;        
+        
+        iw = (int)( (double)iw * s );
+        ih = (int)( (double)ih * s );
+        
         int ix = ( w - iw ) / 2;
-        int iy = ( h - ih ) / 2;
-        g2d.drawImage( img, ix, iy, obs );
+        int iy = ( h - ih ) / 2;                                
+                
+        g2d.drawImage( img, ix, iy, iw, ih, obs );
     }
     
 }

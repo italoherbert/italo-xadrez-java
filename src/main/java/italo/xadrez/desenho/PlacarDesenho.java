@@ -11,7 +11,7 @@ import java.awt.geom.Rectangle2D;
 public class PlacarDesenho implements Desenho {
 
     private final int placarBorda = 10;               
-    private final Font placarFont = new Font( Font.SANS_SERIF, Font.PLAIN, 24 );
+    private final Font placarFont = new Font( Font.SERIF, Font.PLAIN, 20 );
     
     private final Color placarRotuloColor = Color.WHITE;
     private final Color placarValorColor = Color.GREEN;
@@ -61,7 +61,7 @@ public class PlacarDesenho implements Desenho {
         };
         
         int[] larguras = new int[ placarTextos.length ];
-
+                
         int txtX = 0;
         int ph = 0;
         for( int i = 0; i < placarTextos.length; i++ ) {

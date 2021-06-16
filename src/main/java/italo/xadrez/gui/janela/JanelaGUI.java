@@ -29,8 +29,9 @@ public class JanelaGUI extends JFrame implements WindowListener {
     public JanelaGUI() {
         super.setTitle( "Jogo de Xadrez" );
         super.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        super.setSize( 750, 700 );
+        super.setSize( 650, 600 );
         super.setLocationRelativeTo( this ); 
+        super.setResizable( false ); 
 
         try {
             InputStream in = JanelaGUI.class.getResourceAsStream( "/icone.png" );

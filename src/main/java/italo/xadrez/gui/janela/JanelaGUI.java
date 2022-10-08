@@ -1,6 +1,6 @@
 package italo.xadrez.gui.janela;
 
-import italo.xadrez.gui.carregando.CarregandoDesenhoPNL;
+import italo.xadrez.gui.carregando.CarregandoPNL;
 import italo.xadrez.gui.desenho.DesenhoPNL;
 import italo.xadrez.gui.menu.MenuDesenhoPNL;
 import java.awt.CardLayout;
@@ -18,7 +18,7 @@ public class JanelaGUI extends JFrame implements WindowListener {
     public final static String MENU = "menu";
     public final static String JOGO = "jogo";
     
-    private final CarregandoDesenhoPNL carregandoDesenhoPNL = new CarregandoDesenhoPNL();
+    private final CarregandoPNL barraProgressoDesenhoPNL = new CarregandoPNL();
     private final MenuDesenhoPNL menuDesenhoPNL = new MenuDesenhoPNL();
     private final DesenhoPNL jogoDesenhoPNL = new DesenhoPNL();    
     
@@ -42,7 +42,7 @@ public class JanelaGUI extends JFrame implements WindowListener {
         
         Container c = super.getContentPane();
         c.setLayout( card );
-        c.add( CARREGANDO, carregandoDesenhoPNL );
+        c.add(CARREGANDO, barraProgressoDesenhoPNL );
         c.add( MENU, menuDesenhoPNL );
         c.add( JOGO, jogoDesenhoPNL );
         
@@ -92,8 +92,8 @@ public class JanelaGUI extends JFrame implements WindowListener {
         this.listener = listener;
     }
     
-    public CarregandoDesenhoPNL getCarregandoPNL() {
-        return carregandoDesenhoPNL;
+    public CarregandoPNL getBarraProgressoDesenhoPNL() {
+        return barraProgressoDesenhoPNL;
     }
     
     public MenuDesenhoPNL getMenuPNL() {

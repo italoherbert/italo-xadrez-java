@@ -8,11 +8,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 
-public class TelaInicialDesenho implements Desenho {
+public class FundoInicialDesenho implements Desenho {
 
     private final Sistema sistema;
 
-    public TelaInicialDesenho(Sistema sistema) {
+    public FundoInicialDesenho(Sistema sistema) {
         this.sistema = sistema;
     }
     

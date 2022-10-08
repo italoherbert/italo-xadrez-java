@@ -2,6 +2,7 @@ C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algo
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\Tabuleiro.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algoritmo\computador\Minimax.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\move\MoveuListener.java
+C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\desenho\BarraProgDesenho.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\move\Movedor.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\desenho\TecladoGUIListener.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\peca\Cavalo.java
@@ -15,6 +16,7 @@ C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algo
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\controller\MoveuController.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\move\ThreadSource.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algoritmo\computador\JogadaRaizGenerator.java
+C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\carregando\CarregandoPNL.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algoritmo\JogadorAlgoritmo.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\desenho\Tela.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\desenho\TabuleiroDesenho.java
@@ -48,7 +50,7 @@ C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\medi
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\media\CarregandoRecursoException.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\controller\JogoDesenhoController.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\GUI.java
-C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\carregando\CarregandoDesenhoPNL.java
+C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\carregando\BarraProgressoDesenho.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\janela\JanelaGUI.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\media\MediaCarregadorListener.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\XadrezMain.java
@@ -65,9 +67,9 @@ C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algo
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\janela\JanelaGUIListener.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\peca\Torre.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\desenho\PlacarDesenho.java
-C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\desenho\TelaInicialDesenho.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\gui\menu\MenuPNL.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algoritmo\computador\MelhorJogadaCalculator.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\controller\media\CarregandoController.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\nucleo\peca\Peca.java
+C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\desenho\FundoInicialDesenho.java
 C:\Users\italo\Documents\NetBeansProjects\Xadrez\src\main\java\italo\xadrez\algoritmo\computador\to\ThreadSourceAlgoritmo.java

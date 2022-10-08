@@ -1,4 +1,4 @@
-italo\xadrez\gui\carregando\CarregandoDesenhoPNL.class
+italo\xadrez\desenho\FundoInicialDesenho.class
 italo\xadrez\nucleo\move\Movedor.class
 italo\xadrez\media\ImagemManager.class
 italo\xadrez\gui\desenho\Desenho.class
@@ -25,7 +25,6 @@ italo\xadrez\controller\media\CarregandoController.class
 italo\xadrez\gui\desenho\DesenhoPNL.class
 italo\xadrez\nucleo\mat\Matriz.class
 italo\xadrez\nucleo\peca\Cavalo.class
-italo\xadrez\desenho\TelaInicialDesenho.class
 italo\xadrez\nucleo\Tabuleiro.class
 italo\xadrez\media\AudioManager.class
 italo\xadrez\nucleo\peca\Peao.class
@@ -55,6 +54,7 @@ italo\xadrez\desenho\TextoDesenho.class
 italo\xadrez\algoritmo\JogadorAlgoritmo.class
 italo\xadrez\controller\JanelaController.class
 italo\xadrez\Sistema.class
+italo\xadrez\gui\carregando\CarregandoPNL.class
 italo\xadrez\nucleo\peca\PecaManager.class
 italo\xadrez\nucleo\move\Movimento.class
 italo\xadrez\nucleo\peca\Torre.class
@@ -62,7 +62,9 @@ italo\xadrez\algoritmo\computador\JogadaRaizGenerator.class
 italo\xadrez\media\MediaManager.class
 italo\xadrez\algoritmo\computador\to\Jogada.class
 italo\xadrez\algoritmo\computador\Minimax.class
+italo\xadrez\gui\carregando\BarraProgressoDesenho.class
 italo\xadrez\gui\menu\MenuDesenhoPNL.class
+italo\xadrez\desenho\BarraProgDesenho.class
 italo\xadrez\desenho\TextoDesenho$CliqueOuTecle.class
 italo\xadrez\media\MediaCarregadorListener.class
 italo\xadrez\nucleo\move\MoveuListener.class

@@ -14,7 +14,7 @@ public class CarregadorController implements MediaCarregadorListener {
 
     @Override
     public void carregouImagemAbertura() {
-        sistema.getGUI().getJanelaGUI().getCarregandoPNL().repaint();
+        sistema.getGUI().getJanelaGUI().getBarraProgressoDesenhoPNL().repaint();
     }
 
     @Override

@@ -3,18 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>italo</groupId>
     <artifactId>Italo-Xadrez</artifactId>
-    <version>2.6</version>
+    <version>2.6.2</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         
-        <nome-interno>italo-xadrez</nome-interno>
         <executavel>Italo-Xadrez-${project.version}.exe</executavel>
+        <executavel-version>${project.version}.0</executavel-version>
+        <executavel-nome-interno>italo-xadrez</executavel-nome-interno>
+       
+        <empresa>Italo Info LTDA</empresa>
+        <direitos-reservados>Ítalo Herbert</direitos-reservados>
+        
         <icone>xadrez.ico</icone>
         <main.classe>italo.xadrez.XadrezMain</main.classe>        
-        <jre.path></jre.path>
+        <jre.path>jre8</jre.path>
     </properties>
                         
     <build>
@@ -73,15 +78,15 @@
                                 <path>${jre.path}</path>
                             </jre>
                             <versionInfo>
-                                <fileVersion>${project.version}.0.0</fileVersion>
+                                <fileVersion>${executavel-version}</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
-                                <copyright>2021 Ítalo Herbert</copyright>
-                                <productVersion>${project.version}.0.0</productVersion>
-                                <txtProductVersion>${project.version}.0.0</txtProductVersion>
+                                <copyright>${direitos-reservados}</copyright>
+                                <productVersion>${executavel-version}</productVersion>
+                                <txtProductVersion>${executavel-version}</txtProductVersion>
                                 <productName>${project.name}</productName>
-                                <companyName>italoinfo.com</companyName>
-                                <internalName>${nome-interno}</internalName>
+                                <companyName>${empresa}</companyName>
+                                <internalName>${executavel-nome-interno}</internalName>
                                 <originalFilename>${executavel}</originalFilename>
                             </versionInfo>
                         </configuration>

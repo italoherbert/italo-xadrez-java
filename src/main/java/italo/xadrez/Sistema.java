@@ -12,8 +12,9 @@ import italo.xadrez.controller.MenuController;
 import italo.xadrez.controller.MoveuController;
 import italo.xadrez.controller.media.CarregadorController;
 import italo.xadrez.ctrl.JogoCtrl;
+import italo.xadrez.desenho.BarraProgDesenho;
 import italo.xadrez.desenho.JogoDesenho;
-import italo.xadrez.desenho.TelaInicialDesenho;
+import italo.xadrez.desenho.FundoInicialDesenho;
 import italo.xadrez.gui.GUI;
 import italo.xadrez.media.CarregandoRecursoException;
 import italo.xadrez.media.MediaCarregador;
@@ -51,23 +52,28 @@ public class Sistema implements JogoDriver {
     private final GUI gui = new GUI();
     private final Jogo jogo = new Jogo();
     
-    private final TelaInicialDesenho telaInicialDesenho = new TelaInicialDesenho( this );
+    private final FundoInicialDesenho fundoInicialDesenho = new FundoInicialDesenho( this );
+    private final BarraProgDesenho barraProgDesenho = new BarraProgDesenho( fundoInicialDesenho );
+            
     private final JogoDesenho jogoDesenho = new JogoDesenho( this );    
-                
+                    
     private final ComputadorAlgoritmo computador1 = new ComputadorAlgoritmo( this, Jogo.COR_JOGADOR1 );
     private final ComputadorAlgoritmo computador2 = new ComputadorAlgoritmo( this, Jogo.COR_JOGADOR2 );
     private final JogadorAlgoritmo jogador = new JogadorAlgoritmo( this, computador2 );
     private final DoisComputadorAlgoritmo doisComputadorAlgoritmo = new DoisComputadorAlgoritmo( this );
         
-    public Sistema() {
+    public Sistema() {        
         gui.getJanelaGUI().setJanelaGUIListener( janelaController );
         gui.getJanelaGUI().getJogoPNL().setTecladoGUIListener( jogoTecladoController ); 
         
         gui.getJanelaGUI().getMenuPNL().setMenuGUIListener( menuController );
         gui.getJanelaGUI().getJogoPNL().setDesenhoGUIListener( desenhoController );
         
-        gui.getJanelaGUI().getCarregandoPNL().setDesenho( telaInicialDesenho ); 
-        gui.getJanelaGUI().getMenuPNL().setDesenho( telaInicialDesenho );         
+        gui.getJanelaGUI().getBarraProgressoDesenhoPNL().setBarraProgressoDesenho( barraProgDesenho ); 
+        gui.getJanelaGUI().getBarraProgressoDesenhoPNL().setFundoDesenho( fundoInicialDesenho ); 
+
+        gui.getJanelaGUI().getMenuPNL().setFundoDesenho( fundoInicialDesenho );         
+        
         gui.getJanelaGUI().getJogoPNL().setDesenho( jogoDesenho ); 
         
         jogo.setJogoListener( jogoController ); 

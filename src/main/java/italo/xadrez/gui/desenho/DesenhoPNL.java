@@ -18,7 +18,7 @@ public class DesenhoPNL extends JPanel implements Tela, MouseListener, KeyListen
     private Graphics2D bufferGraphics = null;
     
     private DesenhoGUIListener listener = null;
-    private TecladoGUIListener tecladoListener;
+    private TecladoGUIListener tecladoListener = null;
     
     public DesenhoPNL() {
         super.setBackground( Color.BLACK ); 

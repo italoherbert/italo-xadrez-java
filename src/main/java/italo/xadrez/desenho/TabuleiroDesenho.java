@@ -8,7 +8,6 @@ import italo.xadrez.media.ImagemManager;
 import italo.xadrez.nucleo.Jogo;
 import italo.xadrez.nucleo.JogoManager;
 import italo.xadrez.nucleo.Tabuleiro;
-import static italo.xadrez.nucleo.Tabuleiro.NULO;
 import italo.xadrez.nucleo.mat.Matriz;
 import java.awt.BasicStroke;
 import java.awt.Color;

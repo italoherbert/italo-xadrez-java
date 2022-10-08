@@ -42,7 +42,15 @@ public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
         int selecionadaMatI = tabuleiro.getSelecionadaMatI();
         int selecionadaMatJ = tabuleiro.getSelecionadaMatJ();
             
-        if ( tabuleiro.getSelecionadaMatI() != Tabuleiro.NULO ) {   
+        if ( selecionadaMatI != Tabuleiro.NULO ) {   
+            int pid = mat.getValor( selecionadaMatI, selecionadaMatJ );
+            int cor = pecaIDUtil.getPecaCor( pid );
+            
+            if ( cor != jogo.getVezJogador() ) {
+                tabuleiro.limpaSelecao();
+                return;            
+            }
+            
             List<int[]> movs = new LinkedList();
             jogoManager.movimentosValidos( movs, jogo, pecaIDUtil, mat, selecionadaMatI, selecionadaMatJ );        
             
@@ -67,7 +75,7 @@ public class JogadorAlgoritmo implements ThreadSource, ThreadSourceAlgoritmo {
                 
             } else {                
                 tabuleiro.limpaSelecao();
-                if ( matI != selecionadaMatI || matJ != selecionadaMatJ ) {
+                if ( mat.getValor( matI, matJ ) != Const.INT_NULO ) {
                     tabuleiro.setSelecionadaMatI( matI );
                     tabuleiro.setSelecionadaMatJ( matJ );
                 }

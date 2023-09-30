@@ -9,3 +9,5 @@ Ou, se estiver no windows, pode dar dois cliques no arquivo Italo-Xadrez-2.6.2.j
 Obs, para funcionar depende do java 1.8 ou superior instalado na máquina
 
 Para mais detalhes, visite a página do projeto em: https://www.italoinfo.com.br/jogos/jogo-de-xadrez-java
+
+Há uma versão do jogo produzida em C++. Acesse em: https://www.italoinfo.com.br/jogos/jogo-de-xadrez

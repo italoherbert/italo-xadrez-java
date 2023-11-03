@@ -4,7 +4,7 @@ Veja abaixo uma captura de tela do jogo:
 
 !['Jogo de xadrez em Java'](xadrez-em-java.png)
 
-|  :zap:  Esta versão do jogo utiliza muita memória. de 300MB à pouco mais de 1GB   |
+|  :zap:  Esta versão do jogo utiliza muita memória. De 300MB à pouco mais de 1GB   |
 |-----------------------------------------------------------------------------------|
 
 |  :zap:  Isso acontece porque, em java, o garbage collector (GC) é automático!     |

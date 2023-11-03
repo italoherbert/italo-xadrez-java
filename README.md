@@ -1,5 +1,7 @@
 # Italo Xadrez em Java
 
+!['Jogo de xadrez em Java'](xadrez-em-java.png)
+
 Para rodar o jogo, basta baixar o arquivo Italo-Xadrez-2.6.2.jar e rodar executando o seguinte comando:
 
 java -jar Italo-Xadrez-2.6.2.jar

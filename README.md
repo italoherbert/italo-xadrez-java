@@ -13,7 +13,10 @@ Para mais detalhes, visite a página do projeto em: https://www.italoinfo.com.br
 |  :zap:  Esta versão do jogo utiliza muita memória. de 300MB à pouco mais de 1GB   |
 |-----------------------------------------------------------------------------------|
 
-|  :zap:  A versão em C++ utiliza entre 15MB e 24MB apenas |
-|----------------------------------------------------------|
+|  :zap:  Isso acontece porque, em java, o garbage collector (GC) é automático!     |
+|-----------------------------------------------------------------------------------|
+
+|  :zap:  A versão em C++ utiliza entre 15MB e 24MB apenas  |
+|-----------------------------------------------------------|
 
 Há uma versão do jogo produzida em C++. Acesse em: https://www.italoinfo.com.br/jogos/jogo-de-xadrez

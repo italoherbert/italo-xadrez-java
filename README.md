@@ -10,8 +10,8 @@ Obs, para funcionar depende do java 1.8 ou superior instalado na máquina
 
 Para mais detalhes, visite a página do projeto em: https://www.italoinfo.com.br/jogos/jogo-de-xadrez-java
 
-|  :zap:  Esta versão do jogo utiliza muita memória. de 300MB à pouco mais de 1G   |
-|----------------------------------------------------------------------------------|
+|  :zap:  Esta versão do jogo utiliza muita memória. de 300MB à pouco mais de 1GB   |
+|-----------------------------------------------------------------------------------|
 
 |  :zap:  A versão em C++ utiliza entre 15MB e 24MB apenas |
 |----------------------------------------------------------|
